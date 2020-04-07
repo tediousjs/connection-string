@@ -9,11 +9,13 @@
   "bugs": {
     "url": "https://github.com/tediousjs/connection-string/issues"
   },
-  "homepage":"https://github.com/tediousjs/connection-string#readme",
+  "homepage": "https://github.com/tediousjs/connection-string#readme",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
     "test": "mocha",
     "test-pipeline": "mocha --forbid-only"
   },
@@ -25,7 +27,11 @@
   "author": "Dan Hensby <git@hens.by>",
   "license": "MIT",
   "devDependencies": {
+    "chai": "^4.2.0",
     "mocha": "^7.1.1",
+    "prettier": "^2.0.4",
+    "tslint": "^6.1.1",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.8.3"
   }
 }
