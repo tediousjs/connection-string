@@ -1,0 +1,29 @@
+{
+  "name": "@tediousjs/connection-string",
+  "version": "0.1.0",
+  "description": "SQL ConnectionString parser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tediousjs/connection-string"
+  },
+  "bugs": {
+    "url": "https://github.com/tediousjs/connection-string/issues"
+  },
+  "homepage":"https://github.com/tediousjs/connection-string#readme",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "test-pipeline": "mocha --forbid-only"
+  },
+  "keywords": [
+    "mssql",
+    "tsql",
+    "connectionstring"
+  ],
+  "author": "Dan Hensby <git@hens.by>",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^7.1.1",
+    "typescript": "^3.8.3"
+  }
+}
