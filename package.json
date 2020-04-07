@@ -10,7 +10,8 @@
     "url": "https://github.com/tediousjs/connection-string/issues"
   },
   "homepage":"https://github.com/tediousjs/connection-string#readme",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "mocha",
