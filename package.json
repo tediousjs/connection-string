@@ -12,6 +12,7 @@
   "homepage":"https://github.com/tediousjs/connection-string#readme",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "mocha",
     "test-pipeline": "mocha --forbid-only"
   },
