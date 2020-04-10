@@ -115,7 +115,7 @@ export function connectionStringParser(connectionString: string, parserConfig: P
                     } else {
                         finish();
                     }
-                } else if (isTerminator(current)) {
+                } else if (!quoted && isTerminator(current)) {
                     const next = connectionString.charAt(pointer + 1);
                     if (current === next) {
                         push(current);
