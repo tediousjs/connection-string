@@ -40,4 +40,23 @@ are being used, these aliases will be returned as the canonical property.
 
 ```js
 const { parseMssqlConnectionString } = require('@tediousjs/connection-string');
+
+const connectionString = 'User ID=user;Password=password;Initial Catalog=AdventureWorks;Server=MySqlServer';
+
+const parsed = parseConnectionString(connectionString, true);
+
+console.log(parsed);
 ```
+
+Output to console will be:
+
+```json
+{
+  "User ID": "user",
+  "Password": "password",
+  "Initial Catalog": "AdventureWorks",
+  "Data Source": "MySqlServer"
+}
+```
+
+NB: The `Server` property from the connection string has been re-written to the value `Data Source`
