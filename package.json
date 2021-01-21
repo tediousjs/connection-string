@@ -27,6 +27,9 @@
   ],
   "author": "Dan Hensby <git@hens.by>",
   "license": "MIT",
+  "files": [
+    "/lib/**"
+  ],
   "devDependencies": {
     "@types/node": "^14.14.22",
     "chai": "^4.2.0",
