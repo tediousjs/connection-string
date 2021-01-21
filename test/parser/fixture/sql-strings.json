@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Parses a basic connection string",
+    "connection_string": "Persist Security Info=False;User ID=user;Password=password;Initial Catalog=AdventureWorks;Server=MySqlServer",
+    "expected": {
+      "Persist Security Info": false,
+      "User ID": "user",
+      "Password": "password",
+      "Initial Catalog": "AdventureWorks",
+      "Server":  "MySqlServer"
+    },
+    "canonical": false
+  },
+  {
+    "name": "Parses a basic connection string and uses canonical keys",
+    "connection_string": "Persist Security Info=False;User ID=user;Password=password;Initial Catalog=AdventureWorks;Server=MySqlServer",
+    "expected": {
+      "Persist Security Info": false,
+      "User ID": "user",
+      "Password": "password",
+      "Initial Catalog": "AdventureWorks",
+      "Data Source":  "MySqlServer"
+    },
+    "canonical": true
+  }
+]

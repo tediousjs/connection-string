@@ -1,3 +1,7 @@
-import connectionStringParser from './parser/connection-string';
+import parseConnectionString from './parser/connection-string';
+import parseSqlConnectionString from './parser/sql-connection-string';
 
-export { connectionStringParser };
+export {
+    parseConnectionString,
+    parseSqlConnectionString,
+};
