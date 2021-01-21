@@ -1,0 +1,158 @@
+[
+  {
+    "name": "parses a single value",
+    "connection_string": "Keyword=Value",
+    "expected": {
+      "Keyword": "Value"
+    }
+  },
+  {
+    "name": "parses a single value with trailing semicolon",
+    "connection_string": "Keyword=Value;",
+    "expected": {
+      "Keyword": "Value"
+    }
+  },
+  {
+    "name": "parses keywords that contain `=`",
+    "connection_string": "Key==word=Value",
+    "expected": {
+      "Key=word": "Value"
+    }
+  },
+  {
+    "name": "parses values to contain `=`",
+    "connection_string": "Keyword=Val=ue",
+    "expected": {
+      "Keyword": "Val=ue"
+    }
+  },
+  {
+    "name": "parses quoted values with double quotes",
+    "connection_string": "Keyword=\"Value\"",
+    "expected": {
+      "Keyword": "Value"
+    }
+  },
+  {
+    "name": "parses quoted values with single quotes",
+    "connection_string": "Keyword='Value'",
+    "expected": {
+      "Keyword": "Value"
+    }
+  },
+  {
+    "name": "parses values quoted with curly braces",
+    "connection_string": "Keyword={Value}",
+    "expected": {
+      "Keyword": "Value"
+    }
+  },
+  {
+    "name": "parses values with escaped closing curly brace",
+    "connection_string": "Keyword={{Value}}}",
+    "expected": {
+      "Keyword": "{Value}"
+    }
+  },
+  {
+    "name": "parses values with excessive whitespace",
+    "connection_string": "  Keyword   =  Value  ;",
+    "expected": {
+      "Keyword": "Value"
+    }
+  },
+  {
+    "name": "parses quoted values with excessive whitespace",
+    "connection_string": " Keyword = {  Value } ;",
+    "expected": {
+      "Keyword": "  Value "
+    }
+  },
+  {
+    "name": "parses a documented connection string",
+    "connection_string": "Persist Security Info=False;Integrated Security=true;Initial Catalog=Northwind;server=(local)",
+    "expected": {
+      "Persist Security Info": "False",
+      "Integrated Security": "true",
+      "Initial Catalog": "Northwind",
+      "server": "(local)"
+    }
+  },
+  {
+    "name": "parses a standard connection string",
+    "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd",
+    "expected": {
+      "Server": "192.168.0.1",
+      "Database": "testdb",
+      "User Id": "testuser",
+      "Password": "testpwd"
+    }
+  },
+  {
+    "name": "parses a connection string with protocol and port",
+    "connection_string": "Server=tcp:192.168.0.1,1433;Database=testdb;User Id=testuser;Password=testpwd",
+    "expected": {
+      "Server": "tcp:192.168.0.1,1433",
+      "Database": "testdb",
+      "User Id": "testuser",
+      "Password": "testpwd"
+    }
+  },
+  {
+    "name": "parses a connection string with various quotes",
+    "connection_string": "Server=192.168.0.1;Database=testdb;User Id={testuser};Password='t;estpwd'",
+    "expected": {
+      "Server": "192.168.0.1",
+      "Database": "testdb",
+      "User Id": "testuser",
+      "Password": "t;estpwd"
+    }
+  },
+  {
+    "name": "parses a connection string with additional prameters",
+    "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd;MultiSubnetFailover=True",
+    "expected": {
+      "Server": "192.168.0.1",
+      "Database": "testdb",
+      "User Id": "testuser",
+      "Password": "testpwd",
+      "MultiSubnetFailover": "True"
+    }
+  },
+  {
+    "name": "parses a connection string with connection timeout",
+    "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd;Connection Timeout=30",
+    "expected": {
+      "Server": "192.168.0.1",
+      "Database": "testdb",
+      "User Id": "testuser",
+      "Password": "testpwd",
+      "Connection Timeout": "30"
+    }
+  },
+  {
+    "name": "parses a connection string with ReadOnly application intent",
+    "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd;Connection Timeout=30;ApplicationIntent=ReadOnly",
+    "expected": {
+      "Server": "192.168.0.1",
+      "Database": "testdb",
+      "User Id": "testuser",
+      "Password": "testpwd",
+      "Connection Timeout": "30",
+      "ApplicationIntent": "ReadOnly"
+    }
+  },
+  {
+    "name": "parses a connection string with ReadWrite application intent",
+    "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd;Connection Timeout=30;ApplicationIntent=ReadWrite",
+    "expected": {
+      "Server": "192.168.0.1",
+      "Database": "testdb",
+      "User Id": "testuser",
+      "Password": "testpwd",
+      "Connection Timeout": "30",
+      "ApplicationIntent": "ReadWrite"
+    }
+  }
+]

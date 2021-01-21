@@ -13,11 +13,12 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
+    "prepare": "rm -rf lib && tsc",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
-    "test": "mocha",
-    "test-pipeline": "mocha --forbid-only"
+    "test": "mocha test/**/*",
+    "test-pipeline": "mocha --forbid-only test/**/*"
   },
   "keywords": [
     "mssql",
@@ -27,11 +28,13 @@
   "author": "Dan Hensby <git@hens.by>",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^14.14.22",
     "chai": "^4.2.0",
-    "mocha": "^7.1.1",
-    "prettier": "^2.0.4",
-    "tslint": "^6.1.1",
+    "mocha": "^8.2.1",
+    "prettier": "^2.2.1",
+    "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.8.3"
-  }
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {}
 }
