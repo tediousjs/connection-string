@@ -25,10 +25,10 @@ Output to the console will be:
 
 ```json
 {
-  "User ID": "user",
-  "Password": "password",
-  "Initial Catalog": "AdventureWorks",
-  "Server": "MySqlServer"
+  "User id": "user",
+  "password": "password",
+  "initial catalog": "AdventureWorks",
+  "server": "MySqlServer"
 }
 ```
 
@@ -52,10 +52,10 @@ Output to console will be:
 
 ```json
 {
-  "User ID": "user",
-  "Password": "password",
-  "Initial Catalog": "AdventureWorks",
-  "Data Source": "MySqlServer"
+  "user id": "user",
+  "password": "password",
+  "initial catalog": "AdventureWorks",
+  "data source": "MySqlServer"
 }
 ```
 
