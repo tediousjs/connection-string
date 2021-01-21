@@ -28,7 +28,7 @@ const CONFIG: ParserConfig = Object.freeze({
     },
 });
 
-export function connectionStringParser(connectionString: string, parserConfig: ParserConfig = CONFIG): object {
+export default function connectionStringParser(connectionString: string, parserConfig: ParserConfig = CONFIG): object {
     const parsed: {[index: string]: string} = {};
     let collectionMode = CollectionMode.key;
     let started: boolean = false;
