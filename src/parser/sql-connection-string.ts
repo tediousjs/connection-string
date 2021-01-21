@@ -1,12 +1,12 @@
 import parseConnectionString from "./connection-string";
 
-enum SchemaTypes {
+export enum SchemaTypes {
     BOOL,
     STRING,
     NUMBER,
 }
 
-interface SchemaItem {
+export interface SchemaItem {
     type: SchemaTypes,
     allowedValues?: any[],
     default?: any,
@@ -16,12 +16,12 @@ interface SchemaItem {
     validator?(val: any): boolean,
 }
 
-interface SchemaDefinition {
+export interface SchemaDefinition {
     [name: string]: SchemaItem,
 }
 
 // schema for MSSQL connection strings (https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring)
-const SCHEMA: SchemaDefinition = {
+export const SCHEMA: SchemaDefinition = {
     'Application Name': {
         type: SchemaTypes.STRING,
         aliases: ['App'],
@@ -250,7 +250,7 @@ function validate(value: any, allowedValues?: any[], validator?: (val: any) => b
     return valid;
 }
 
-export default function parseSqlConnectionString(connectionString: string, canonicalProps: boolean = false, strict: boolean = false, schema: SchemaDefinition = SCHEMA,) {
+export default function parseSqlConnectionString(connectionString: string, canonicalProps: boolean = false, strict: boolean = false, schema: SchemaDefinition = SCHEMA) {
     const flattenedSchema = Object.entries(schema).reduce((flattened: SchemaDefinition, [key, item]) => {
         return item.aliases?.reduce((accum, alias: string) => {
             return Object.assign(accum, {

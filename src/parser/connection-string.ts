@@ -1,9 +1,9 @@
-interface CollectionConfig {
+export interface CollectionConfig {
     terminator: string,
     quotes: {[index: string]: string},
 }
 
-interface ParserConfig {
+export interface ParserConfig {
     key: CollectionConfig,
     value: CollectionConfig,
 }
