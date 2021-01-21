@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.2.0 (2021-01-??)
+## v0.2.0 (2021-01-21)
 
 - Parsed query strings return lowercase keys [#3]
 
