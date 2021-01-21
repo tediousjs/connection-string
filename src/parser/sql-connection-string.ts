@@ -217,6 +217,19 @@ export const SCHEMA: SchemaDefinition = {
     },
 };
 
+function guessType(value: string): SchemaTypes {
+    if (value.trim() === '') {
+        return SchemaTypes.STRING;
+    }
+    if (!Number.isNaN(parseInt(value, 10))) {
+        return SchemaTypes.NUMBER;
+    }
+    if (['true', 'false', 'yes', 'no'].includes(value.toLowerCase())) {
+        return SchemaTypes.BOOL;
+    }
+    return SchemaTypes.STRING;
+}
+
 function coerce(value: string, type: SchemaTypes, coercer?: (val: string) => any) {
     if (coercer) {
         const coerced = coercer(value);
@@ -236,6 +249,7 @@ function coerce(value: string, type: SchemaTypes, coercer?: (val: string) => any
         case SchemaTypes.NUMBER:
             return parseInt(value, 10);
     }
+
     return value;
 }
 
@@ -250,7 +264,7 @@ function validate(value: any, allowedValues?: any[], validator?: (val: any) => b
     return valid;
 }
 
-export default function parseSqlConnectionString(connectionString: string, canonicalProps: boolean = false, strict: boolean = false, schema: SchemaDefinition = SCHEMA) {
+export default function parseSqlConnectionString(connectionString: string, canonicalProps: boolean = false, allowUnknown: boolean = false, strict: boolean = false, schema: SchemaDefinition = SCHEMA) {
     const flattenedSchema = Object.entries(schema).reduce((flattened: SchemaDefinition, [key, item]) => {
         Object.assign(flattened, {
             [key.toLowerCase()]: item,
@@ -266,17 +280,17 @@ export default function parseSqlConnectionString(connectionString: string, canon
     }, {});
     return Object.entries(parseConnectionString(connectionString)).reduce((config, [prop, value]) => {
         if (!Object.prototype.hasOwnProperty.call(flattenedSchema, prop)) {
-            // @todo - allow assigning in un-recognised props
-            return config;
+            return Object.assign(config, {
+                [prop]: coerce(value, guessType(value)),
+            });
         }
         let coercedValue = coerce(value, flattenedSchema[prop].type, flattenedSchema[prop].coerce);
         if (strict && !validate(coercedValue, flattenedSchema[prop].allowedValues, flattenedSchema[prop].validator)) {
             coercedValue = flattenedSchema[prop].default;
         }
         const propName = canonicalProps ? flattenedSchema[prop].canonical || prop : prop;
-        Object.assign(config, {
+        return Object.assign(config, {
             [propName]: coercedValue,
         });
-        return config;
     }, {});
 }
