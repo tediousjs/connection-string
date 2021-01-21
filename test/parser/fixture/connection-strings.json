@@ -3,79 +3,79 @@
     "name": "parses a single value",
     "connection_string": "Keyword=Value",
     "expected": {
-      "Keyword": "Value"
+      "keyword": "Value"
     }
   },
   {
     "name": "parses a single value with trailing semicolon",
     "connection_string": "Keyword=Value;",
     "expected": {
-      "Keyword": "Value"
+      "keyword": "Value"
     }
   },
   {
     "name": "parses keywords that contain `=`",
     "connection_string": "Key==word=Value",
     "expected": {
-      "Key=word": "Value"
+      "key=word": "Value"
     }
   },
   {
     "name": "parses values to contain `=`",
     "connection_string": "Keyword=Val=ue",
     "expected": {
-      "Keyword": "Val=ue"
+      "keyword": "Val=ue"
     }
   },
   {
     "name": "parses quoted values with double quotes",
     "connection_string": "Keyword=\"Value\"",
     "expected": {
-      "Keyword": "Value"
+      "keyword": "Value"
     }
   },
   {
     "name": "parses quoted values with single quotes",
     "connection_string": "Keyword='Value'",
     "expected": {
-      "Keyword": "Value"
+      "keyword": "Value"
     }
   },
   {
     "name": "parses values quoted with curly braces",
     "connection_string": "Keyword={Value}",
     "expected": {
-      "Keyword": "Value"
+      "keyword": "Value"
     }
   },
   {
     "name": "parses values with escaped closing curly brace",
     "connection_string": "Keyword={{Value}}}",
     "expected": {
-      "Keyword": "{Value}"
+      "keyword": "{Value}"
     }
   },
   {
     "name": "parses values with excessive whitespace",
     "connection_string": "  Keyword   =  Value  ;",
     "expected": {
-      "Keyword": "Value"
+      "keyword": "Value"
     }
   },
   {
     "name": "parses quoted values with excessive whitespace",
     "connection_string": " Keyword = {  Value } ;",
     "expected": {
-      "Keyword": "  Value "
+      "keyword": "  Value "
     }
   },
   {
     "name": "parses a documented connection string",
     "connection_string": "Persist Security Info=False;Integrated Security=true;Initial Catalog=Northwind;server=(local)",
     "expected": {
-      "Persist Security Info": "False",
-      "Integrated Security": "true",
-      "Initial Catalog": "Northwind",
+      "persist security info": "False",
+      "integrated security": "true",
+      "initial catalog": "Northwind",
       "server": "(local)"
     }
   },
@@ -83,76 +83,76 @@
     "name": "parses a standard connection string",
     "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd",
     "expected": {
-      "Server": "192.168.0.1",
-      "Database": "testdb",
-      "User Id": "testuser",
-      "Password": "testpwd"
+      "server": "192.168.0.1",
+      "database": "testdb",
+      "user id": "testuser",
+      "password": "testpwd"
     }
   },
   {
     "name": "parses a connection string with protocol and port",
     "connection_string": "Server=tcp:192.168.0.1,1433;Database=testdb;User Id=testuser;Password=testpwd",
     "expected": {
-      "Server": "tcp:192.168.0.1,1433",
-      "Database": "testdb",
-      "User Id": "testuser",
-      "Password": "testpwd"
+      "server": "tcp:192.168.0.1,1433",
+      "database": "testdb",
+      "user id": "testuser",
+      "password": "testpwd"
     }
   },
   {
     "name": "parses a connection string with various quotes",
     "connection_string": "Server=192.168.0.1;Database=testdb;User Id={testuser};Password='t;estpwd'",
     "expected": {
-      "Server": "192.168.0.1",
-      "Database": "testdb",
-      "User Id": "testuser",
-      "Password": "t;estpwd"
+      "server": "192.168.0.1",
+      "database": "testdb",
+      "user id": "testuser",
+      "password": "t;estpwd"
     }
   },
   {
     "name": "parses a connection string with additional prameters",
     "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd;MultiSubnetFailover=True",
     "expected": {
-      "Server": "192.168.0.1",
-      "Database": "testdb",
-      "User Id": "testuser",
-      "Password": "testpwd",
-      "MultiSubnetFailover": "True"
+      "server": "192.168.0.1",
+      "database": "testdb",
+      "user id": "testuser",
+      "password": "testpwd",
+      "multisubnetfailover": "True"
     }
   },
   {
     "name": "parses a connection string with connection timeout",
     "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd;Connection Timeout=30",
     "expected": {
-      "Server": "192.168.0.1",
-      "Database": "testdb",
-      "User Id": "testuser",
-      "Password": "testpwd",
-      "Connection Timeout": "30"
+      "server": "192.168.0.1",
+      "database": "testdb",
+      "user id": "testuser",
+      "password": "testpwd",
+      "connection timeout": "30"
     }
   },
   {
     "name": "parses a connection string with ReadOnly application intent",
     "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd;Connection Timeout=30;ApplicationIntent=ReadOnly",
     "expected": {
-      "Server": "192.168.0.1",
-      "Database": "testdb",
-      "User Id": "testuser",
-      "Password": "testpwd",
-      "Connection Timeout": "30",
-      "ApplicationIntent": "ReadOnly"
+      "server": "192.168.0.1",
+      "database": "testdb",
+      "user id": "testuser",
+      "password": "testpwd",
+      "connection timeout": "30",
+      "applicationintent": "ReadOnly"
     }
   },
   {
     "name": "parses a connection string with ReadWrite application intent",
     "connection_string": "Server=192.168.0.1;Database=testdb;User Id=testuser;Password=testpwd;Connection Timeout=30;ApplicationIntent=ReadWrite",
     "expected": {
-      "Server": "192.168.0.1",
-      "Database": "testdb",
-      "User Id": "testuser",
-      "Password": "testpwd",
-      "Connection Timeout": "30",
-      "ApplicationIntent": "ReadWrite"
+      "server": "192.168.0.1",
+      "database": "testdb",
+      "user id": "testuser",
+      "password": "testpwd",
+      "connection timeout": "30",
+      "applicationintent": "ReadWrite"
     }
   }
 ]
