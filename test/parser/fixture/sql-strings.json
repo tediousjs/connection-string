@@ -9,7 +9,8 @@
       "initial catalog": "AdventureWorks",
       "server":  "MySqlServer"
     },
-    "canonical": false
+    "canonical": false,
+    "allowUnknown": false
   },
   {
     "name": "Parses a basic connection string and uses canonical keys",
@@ -21,6 +22,21 @@
       "initial catalog": "AdventureWorks",
       "data source":  "MySqlServer"
     },
-    "canonical": true
+    "canonical": true,
+    "allowUnknown": false
+  },
+  {
+    "name": "Parses a connection string and allows unknown values",
+    "connection_string": "Persist Security Info=False;User ID=user;Password=password;Initial Catalog=AdventureWorks;Server=MySqlServer;stream=true",
+    "expected": {
+      "persist security info": false,
+      "user id": "user",
+      "password": "password",
+      "initial catalog": "AdventureWorks",
+      "data source":  "MySqlServer",
+      "stream": true
+    },
+    "canonical": true,
+    "allowUnknown": true
   }
 ]
