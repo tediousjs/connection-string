@@ -81,7 +81,7 @@ export default function connectionStringParser(connectionString: string, parserC
         }
         switch (collectionMode) {
             case CollectionMode.key:
-                currentKey = buffer;
+                currentKey = buffer.toLowerCase();
                 collectionMode = CollectionMode.value;
                 break;
             case CollectionMode.value:

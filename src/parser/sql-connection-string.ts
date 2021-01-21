@@ -252,15 +252,18 @@ function validate(value: any, allowedValues?: any[], validator?: (val: any) => b
 
 export default function parseSqlConnectionString(connectionString: string, canonicalProps: boolean = false, strict: boolean = false, schema: SchemaDefinition = SCHEMA) {
     const flattenedSchema = Object.entries(schema).reduce((flattened: SchemaDefinition, [key, item]) => {
+        Object.assign(flattened, {
+            [key.toLowerCase()]: item,
+        });
         return item.aliases?.reduce((accum, alias: string) => {
             return Object.assign(accum, {
-                [alias]: {
+                [alias.toLowerCase()]: {
                     ...item,
-                    canonical: key,
+                    canonical: key.toLowerCase(),
                 },
             });
         }, flattened) || flattened;
-    }, { ...schema });
+    }, {});
     return Object.entries(parseConnectionString(connectionString)).reduce((config, [prop, value]) => {
         if (!Object.prototype.hasOwnProperty.call(flattenedSchema, prop)) {
             // @todo - allow assigning in un-recognised props
