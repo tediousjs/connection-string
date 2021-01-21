@@ -30,6 +30,9 @@
   "files": [
     "/lib/**"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@types/node": "^14.14.22",
     "chai": "^4.2.0",
