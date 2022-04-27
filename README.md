@@ -2,7 +2,7 @@
 
 This node library is designed to allow the parsing of Connection Strings see https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring
 
-The library also provides the ability to pares SQL Connection Strings.
+The library also provides the ability to parse SQL Connection Strings.
 
 # Usage
 
@@ -35,7 +35,7 @@ Output to the console will be:
 ## Parsing SQL connection strings
 
 There is a specific helper for parsing SQL connection strings and this comes with a value normaliser and validation. It also has an
-option to "canonicalise" the properties. For many properties in an SQL connections string, there are aliases, when canoncical properties
+option to "canonicalise" the properties. For many properties in an SQL connections string, there are aliases, when canonical properties
 are being used, these aliases will be returned as the canonical property.
 
 ```js
