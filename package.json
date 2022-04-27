@@ -15,8 +15,7 @@
   "scripts": {
     "prepare": "tsc",
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
+    "lint": "eslint .",
     "test": "mocha -r ts-node/register test/**/*",
     "test-pipeline": "mocha --forbid-only test/**/*"
   },
@@ -38,9 +37,11 @@
     "@types/chai": "^4.3.1",
     "@types/mocha": "^9.1.1",
     "@types/node": "^10.17.60",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
     "chai": "^4.2.0",
+    "eslint": "^8.14.0",
     "mocha": "^8.2.1",
-    "prettier": "^2.2.1",
     "ts-node": "^10.7.0",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",

@@ -6,14 +6,17 @@ export enum SchemaTypes {
     NUMBER,
 }
 
+type Coercer = (val: string) => string | number | boolean | null;
+type Validator = (val: string | number | boolean) => boolean;
+
 export interface SchemaItem {
     type: SchemaTypes,
-    allowedValues?: any[],
-    default?: any,
+    allowedValues?: (string | number | boolean)[],
+    default?: string | number | boolean,
     aliases?: string[],
     canonical?: string,
-    coerce?(val: string): any,
-    validator?(val: any): boolean,
+    coerce?: Coercer,
+    validator?: Validator,
 }
 
 export interface SchemaDefinition {
@@ -25,8 +28,8 @@ export const SCHEMA: SchemaDefinition = {
     'Application Name': {
         type: SchemaTypes.STRING,
         aliases: ['App'],
-        validator(val: string) {
-            return val.length <= 128;
+        validator(val: string | number | boolean) {
+            return typeof val === 'string' && val.length <= 128;
         },
     },
     'ApplicationIntent': {
@@ -63,7 +66,7 @@ export const SCHEMA: SchemaDefinition = {
     'ConnectRetryCount': {
         type: SchemaTypes.NUMBER,
         default: 1,
-        validator(val: number): boolean {
+        validator(val: string | number | boolean): boolean {
             return val > 0 && val <= 255;
         },
     },
@@ -78,8 +81,8 @@ export const SCHEMA: SchemaDefinition = {
     'Current Language': {
         aliases: ['Language'],
         type: SchemaTypes.STRING,
-        validator(val: string): boolean {
-            return val.length <= 128;
+        validator(val: string | number | boolean): boolean {
+            return typeof val === 'string' && val.length <= 128;
         },
     },
     'Data Source': {
@@ -100,28 +103,28 @@ export const SCHEMA: SchemaDefinition = {
     'Initial Catalog': {
         type: SchemaTypes.STRING,
         aliases: ['Database'],
-        validator(val: string): boolean {
-            return val.length <= 128;
+        validator(val: string | number | boolean): boolean {
+            return typeof val === 'string' && val.length <= 128;
         },
     },
     'Integrated Security': {
         type: SchemaTypes.BOOL,
         aliases: ['Trusted_Connection'],
-        coerce(val: string): any {
+        coerce(val: string): boolean | null {
             return val === 'sspi' || null;
         },
     },
     'Max Pool Size': {
         type: SchemaTypes.NUMBER,
         default: 100,
-        validator(val: number): boolean {
+        validator(val: string | number | boolean): boolean {
             return val >= 1;
         },
     },
     'Min Pool Size': {
         type: SchemaTypes.NUMBER,
         default: 0,
-        validator(val: number): boolean {
+        validator(val: string | number | boolean): boolean {
             return val >= 0;
         },
     },
@@ -141,15 +144,15 @@ export const SCHEMA: SchemaDefinition = {
     'Packet Size': {
         type: SchemaTypes.NUMBER,
         default: 8000,
-        validator(val: number): boolean {
+        validator(val: string | number | boolean): boolean {
             return val >= 512 && val <= 32768;
         },
     },
     'Password': {
         type: SchemaTypes.STRING,
         aliases: ['PWD'],
-        validator(val: string): boolean {
-            return val.length <= 128;
+        validator(val: string | number | boolean): boolean {
+            return typeof val === 'string' && val.length <= 128;
         },
     },
     'Persist Security Info': {
@@ -160,7 +163,10 @@ export const SCHEMA: SchemaDefinition = {
     'PoolBlockingPeriod': {
         type: SchemaTypes.NUMBER,
         default: 0,
-        coerce(val: string): any {
+        coerce(val: string | number | boolean): number | null {
+            if (typeof val !== 'string') {
+                return null;
+            }
             switch (val.toLowerCase()) {
                 case 'alwaysblock':
                     return 1;
@@ -200,8 +206,8 @@ export const SCHEMA: SchemaDefinition = {
     'User ID': {
         type: SchemaTypes.STRING,
         aliases: ['UID'],
-        validator(val: string): boolean {
-            return val.length <= 128;
+        validator(val: string | number | boolean): boolean {
+            return typeof val === 'string' && val.length <= 128;
         },
     },
     'User Instance': {
@@ -211,8 +217,8 @@ export const SCHEMA: SchemaDefinition = {
     'Workstation ID': {
         type: SchemaTypes.STRING,
         aliases: ['WSID'],
-        validator(val: string): boolean {
-            return val.length <= 128;
+        validator(val: string | number | boolean): boolean {
+            return typeof val === 'string' && val.length <= 128;
         },
     },
 };
@@ -230,7 +236,7 @@ function guessType(value: string): SchemaTypes {
     return SchemaTypes.STRING;
 }
 
-function coerce(value: string, type: SchemaTypes, coercer?: (val: string) => any) {
+function coerce(value: string, type: SchemaTypes, coercer?: Coercer) {
     if (coercer) {
         const coerced = coercer(value);
         if (coerced !== null) {
@@ -253,7 +259,7 @@ function coerce(value: string, type: SchemaTypes, coercer?: (val: string) => any
     return value;
 }
 
-function validate(value: any, allowedValues?: any[], validator?: (val: any) => boolean) {
+function validate(value: string | number | boolean, allowedValues?: (string | number | boolean)[], validator?: (val: string | number | boolean) => boolean) {
     let valid = true;
     if (validator) {
         valid = validator(value);
@@ -264,7 +270,8 @@ function validate(value: any, allowedValues?: any[], validator?: (val: any) => b
     return valid;
 }
 
-export default function parseSqlConnectionString(connectionString: string, canonicalProps: boolean = false, allowUnknown: boolean = false, strict: boolean = false, schema: SchemaDefinition = SCHEMA) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function parseSqlConnectionString(connectionString: string, canonicalProps = false, allowUnknown = false, strict = false, schema: SchemaDefinition = SCHEMA) {
     const flattenedSchema = Object.entries(schema).reduce((flattened: SchemaDefinition, [key, item]) => {
         Object.assign(flattened, {
             [key.toLowerCase()]: item,
@@ -284,7 +291,7 @@ export default function parseSqlConnectionString(connectionString: string, canon
                 [prop]: coerce(value, guessType(value)),
             });
         }
-        let coercedValue = coerce(value, flattenedSchema[prop].type, flattenedSchema[prop].coerce);
+        let coercedValue: string | number | boolean | undefined = coerce(value, flattenedSchema[prop].type, flattenedSchema[prop].coerce);
         if (strict && !validate(coercedValue, flattenedSchema[prop].allowedValues, flattenedSchema[prop].validator)) {
             coercedValue = flattenedSchema[prop].default;
         }
