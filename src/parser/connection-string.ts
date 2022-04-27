@@ -29,15 +29,15 @@ const CONFIG: ParserConfig = Object.freeze({
 });
 
 export default function connectionStringParser(connectionString: string, parserConfig: ParserConfig = CONFIG): object {
-    const parsed: {[index: string]: string} = {};
+    const parsed: Record<string, string> = {};
     let collectionMode = CollectionMode.key;
-    let started: boolean = false;
-    let finished: boolean = false;
-    let quoted: boolean = false;
-    let quote: string = '';
-    let buffer: string = '';
-    let currentKey: string = '';
-    let pointer: number = 0;
+    let started = false;
+    let finished = false;
+    let quoted = false;
+    let quote = '';
+    let buffer = '';
+    let currentKey = '';
+    let pointer = 0;
 
     function start(): void {
         started = true;
