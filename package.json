@@ -17,7 +17,7 @@
     "build": "tsc",
     "lint": "eslint .",
     "test": "mocha -r ts-node/register test/**/*",
-    "test-pipeline": "mocha --forbid-only test/**/*"
+    "test:workflow": "npm run test --silent -- --forbid-only"
   },
   "keywords": [
     "mssql",
