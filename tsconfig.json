@@ -3,7 +3,9 @@
   "extends": "@tsconfig/node10/tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
-    "sourceMap": true
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
   },
   "exclude": ["test/"]
 }
