@@ -14,7 +14,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "prepare": "tsc",
-    "build": "tsc",
+    "build": "rimraf ./lib && tsc",
     "lint": "eslint .",
     "test": "mocha -r ts-node/register test/**/*",
     "test:workflow": "npm run test --silent -- --forbid-only"
@@ -42,10 +42,10 @@
     "chai": "^4.2.0",
     "eslint": "^8.14.0",
     "mocha": "^9.2.2",
+    "rimraf": "^3.0.2",
     "ts-node": "^10.7.0",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.1.3"
-  },
-  "dependencies": {}
+  }
 }
