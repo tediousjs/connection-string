@@ -7,5 +7,5 @@
     "outDir": "lib",
     "sourceMap": true
   },
-  "exclude": ["test/"]
+  "exclude": ["test/", "lib/"]
 }
