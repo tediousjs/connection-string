@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.1 (2022-06-07)
+
+- Add missing type declarations
+
 ## v0.4.0 (2022-04-27)
 
 - Add LICENSE file (MIT) #17
