@@ -39,11 +39,11 @@ option to "canonicalise" the properties. For many properties in an SQL connectio
 are being used, these aliases will be returned as the canonical property.
 
 ```js
-const { parseMssqlConnectionString } = require('@tediousjs/connection-string');
+const { parseSqlConnectionString } = require('@tediousjs/connection-string');
 
 const connectionString = 'User ID=user;Password=password;Initial Catalog=AdventureWorks;Server=MySqlServer';
 
-const parsed = parseConnectionString(connectionString, true);
+const parsed = parseSqlConnectionString(connectionString, true);
 
 console.log(parsed);
 ```
