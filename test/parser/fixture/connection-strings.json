@@ -70,6 +70,13 @@
     }
   },
   {
+    "name": "parses a string value that starts with numbers",
+    "connection_string": "Keyword=012acb",
+    "expected": {
+      "keyword": "012acb"
+    }
+  },
+  {
     "name": "parses a documented connection string",
     "connection_string": "Persist Security Info=False;Integrated Security=true;Initial Catalog=Northwind;server=(local)",
     "expected": {

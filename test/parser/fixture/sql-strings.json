@@ -38,5 +38,14 @@
     },
     "canonical": true,
     "allowUnknown": true
+  },
+  {
+    "name": "parses a string value that starts with numbers",
+    "connection_string": "client id=1e92dd5a-091f-4b2b-bc1b-8461ced6a177;client secret=55a4ef49-bef5-4669-818b-ff148c0c0db9;tenant id=5dc09092-ee09-4e5c-9515-ba937415e9ff;",
+    "expected": {
+      "client id": "1e92dd5a-091f-4b2b-bc1b-8461ced6a177",
+      "client secret": "55a4ef49-bef5-4669-818b-ff148c0c0db9",
+      "tenant id": "5dc09092-ee09-4e5c-9515-ba937415e9ff"
+    }
   }
 ]
