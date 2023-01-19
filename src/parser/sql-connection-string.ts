@@ -227,7 +227,8 @@ function guessType(value: string): SchemaTypes {
     if (value.trim() === '') {
         return SchemaTypes.STRING;
     }
-    if (!Number.isNaN(parseInt(value, 10))) {
+    const asNum = parseInt(value, 10);
+    if (!Number.isNaN(asNum) && asNum.toString() === value) {
         return SchemaTypes.NUMBER;
     }
     if (['true', 'false', 'yes', 'no'].includes(value.toLowerCase())) {
