@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.1 (2023-01-19)
+
+- Fix bug with parsing string values that start with numbers
+
 ## v0.4.1 (2022-06-07)
 
 - Add missing type declarations
