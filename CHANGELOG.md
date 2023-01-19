@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.4.1 (2023-01-19)
+## v0.4.2 (2023-01-19)
 
 - Fix bug with parsing string values that start with numbers
 
