@@ -1,5 +1,8 @@
 # Connection String Parser
 
+[![npm version](https://badge.fury.io/js/@tediousjs%2Fconnection-string.svg)](https://www.npmjs.com/package/@tediousjs/connection-string)
+[![Lint, Test & Release](https://github.com/tediousjs/connection-string/actions/workflows/nodejs.yml/badge.svg)](https://github.com/tediousjs/connection-string/actions/workflows/nodejs.yml)
+
 This node library is designed to allow the parsing of Connection Strings see https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring
 
 The library also provides the ability to parse SQL Connection Strings.
