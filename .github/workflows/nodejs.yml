@@ -82,6 +82,7 @@ jobs:
       - commitlint
       - codelint
     permissions:
+      contents: read
       pull-requests: write # to be able to comment on released pull requests
     steps:
       - uses: actions/checkout@v3
