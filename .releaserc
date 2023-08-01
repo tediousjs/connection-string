@@ -1,7 +1,6 @@
 branches:
   - master
-preset:
-  - conventionalcommits
+preset: conventionalcommits
 plugins:
   - '@semantic-release/commit-analyzer'
   - '@semantic-release/release-notes-generator'
