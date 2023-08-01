@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.3](https://github.com/tediousjs/connection-string/compare/v0.4.2...v0.4.3) (2023-08-01)
+
+
+### Bug Fixes
+
+* add readme badges ([787da44](https://github.com/tediousjs/connection-string/commit/787da44258a40111527ecd4a145577e0319d7cb1))
+
 ## [0.4.2](https://github.com/tediousjs/connection-string/compare/v0.4.1...v0.4.2) (2023-08-01)
 
 
