@@ -75,6 +75,41 @@ jobs:
         run: npm clean-install
       - name: Run tests
         run: npm run test:workflow
+  coverage:
+    name: Test coverage
+    runs-on: ubuntu-latest
+    needs:
+      - commitlint
+      - codelint
+    permissions:
+      pull-requests: write # to be able to comment on released pull requests
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: 'npm'
+      - name: Install deps
+        run: npm ci
+      - name: Test code
+        run: npm run test:coverage --silent -- npm run test:workflow
+      - name: Code Coverage Summary
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: coverage/cobertura-coverage.xml
+          badge: true
+          format: markdown
+          output: both
+      - name: Add Coverage PR Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        with:
+          recreate: true
+          path: code-coverage-results.md
   release:
     name: Release
     concurrency: release
