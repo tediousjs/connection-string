@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/tediousjs/connection-string/compare/v0.4.1...v0.4.2) (2023-08-01)
+
+
+### Bug Fixes
+
+* update return types for parsers ([bb6393a](https://github.com/tediousjs/connection-string/commit/bb6393a7456afd5cb5759e63c3f9ec2a9e0b8f48))
+
 ## v0.4.2 (2023-01-19)
 
 - Fix bug with parsing string values that start with numbers
