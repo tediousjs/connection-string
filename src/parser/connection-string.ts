@@ -1,6 +1,6 @@
 export interface CollectionConfig {
     terminator: string,
-    quotes: {[index: string]: string},
+    quotes: Record<string, string>,
 }
 
 export interface ParserConfig {
