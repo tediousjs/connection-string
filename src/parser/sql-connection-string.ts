@@ -272,7 +272,7 @@ function validate(value: string | number | boolean, allowedValues?: (string | nu
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function parseSqlConnectionString(connectionString: string, canonicalProps = false, allowUnknown = false, strict = false, schema: SchemaDefinition = SCHEMA) {
+export default function parseSqlConnectionString(connectionString: string, canonicalProps = false, allowUnknown = false, strict = false, schema: SchemaDefinition = SCHEMA): Record<string, string | number | boolean> {
     const flattenedSchema = Object.entries(schema).reduce((flattened: SchemaDefinition, [key, item]) => {
         Object.assign(flattened, {
             [key.toLowerCase()]: item,
