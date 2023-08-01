@@ -18,11 +18,8 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "comma-dangle": "off",
     "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
-    "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
-    "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"]
   },
   "overrides": [{
