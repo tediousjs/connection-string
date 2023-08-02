@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.4](https://github.com/tediousjs/connection-string/compare/v0.4.3...v0.4.4) (2023-08-02)
+
+
+### Bug Fixes
+
+* update typings ([bbd7ddc](https://github.com/tediousjs/connection-string/commit/bbd7ddcc9c3fe848e31267c40176eb337855d5c4))
+
 ## [0.4.3](https://github.com/tediousjs/connection-string/compare/v0.4.2...v0.4.3) (2023-08-01)
 
 
