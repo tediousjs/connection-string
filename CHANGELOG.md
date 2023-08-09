@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/tediousjs/connection-string/compare/v0.4.4...v0.5.0) (2023-08-09)
+
+
+### Features
+
+* add connection string builder ([369a63f](https://github.com/tediousjs/connection-string/commit/369a63f03f263d81f576fb9f38afd80cf3b95f96))
+
 ## [0.4.4](https://github.com/tediousjs/connection-string/compare/v0.4.3...v0.4.4) (2023-08-02)
 
 
