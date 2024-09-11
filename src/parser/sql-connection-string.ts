@@ -48,7 +48,16 @@ export const SCHEMA: SchemaDefinition = {
     },
     'Authentication': {
         type: SchemaTypes.STRING,
-        allowedValues: ['Active Directory Integrated', 'Active Directory Password', 'Sql Password'],
+        allowedValues: [
+            'Active Directory Default',
+            'Active Directory Device Code Flow',
+            'Active Directory Integrated',
+            'Active Directory Interactive',
+            'Active Directory Managed Identity',
+            'Active Directory Password',
+            'Active Directory Service Principal',
+            'SQL Password',
+        ],
     },
     'Column Encryption Setting': {
         type: SchemaTypes.STRING,
