@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/tediousjs/connection-string/compare/v0.5.0...v0.6.0) (2024-09-11)
+
+
+### Features
+
+* add more authentication options ([cae1d20](https://github.com/tediousjs/connection-string/commit/cae1d2054c622dbd5e707e54bbaccccccd171f01))
+
 ## [0.5.0](https://github.com/tediousjs/connection-string/compare/v0.4.4...v0.5.0) (2023-08-09)
 
 
