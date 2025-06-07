@@ -76,7 +76,7 @@ export const SCHEMA: SchemaDefinition = {
         type: SchemaTypes.NUMBER,
         default: 1,
         validator(val: string | number | boolean): boolean {
-            return val > 0 && val <= 255;
+            return typeof val === 'number' && val > 0 && val <= 255;
         },
     },
     'ConnectRetryInterval': {
@@ -127,14 +127,14 @@ export const SCHEMA: SchemaDefinition = {
         type: SchemaTypes.NUMBER,
         default: 100,
         validator(val: string | number | boolean): boolean {
-            return val >= 1;
+            return typeof val === 'number' && val >= 1;
         },
     },
     'Min Pool Size': {
         type: SchemaTypes.NUMBER,
         default: 0,
         validator(val: string | number | boolean): boolean {
-            return val >= 0;
+            return typeof val === 'number' && val >= 0;
         },
     },
     'MultipleActiveResultSets': {
@@ -154,7 +154,7 @@ export const SCHEMA: SchemaDefinition = {
         type: SchemaTypes.NUMBER,
         default: 8000,
         validator(val: string | number | boolean): boolean {
-            return val >= 512 && val <= 32768;
+            return typeof val === 'number' &&  val >= 512 && val <= 32768;
         },
     },
     'Password': {
