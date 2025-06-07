@@ -1,9 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { expect } from 'chai';
 import { parseSqlConnectionString } from '../../src';
 import { Fixture } from './fixture';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const fixtures: Fixture[] = require('./fixture/sql-strings');
+const fixtures: Fixture[] = JSON.parse(readFileSync(join(__dirname, './fixture/sql-strings.json')).toString());
 
 describe('parser', () => {
     describe('sql-connection-string', () => {

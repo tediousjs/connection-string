@@ -1,4 +1,4 @@
-import parseConnectionString from "./connection-string";
+import parseConnectionString from './connection-string';
 
 export enum SchemaTypes {
     BOOL,
@@ -10,17 +10,17 @@ type Coercer = (val: string) => string | number | boolean | null;
 type Validator = (val: string | number | boolean) => boolean;
 
 export interface SchemaItem {
-    type: SchemaTypes,
-    allowedValues?: (string | number | boolean)[],
-    default?: string | number | boolean,
-    aliases?: string[],
-    canonical?: string,
-    coerce?: Coercer,
-    validator?: Validator,
+    type: SchemaTypes;
+    allowedValues?: (string | number | boolean)[];
+    default?: string | number | boolean;
+    aliases?: string[];
+    canonical?: string;
+    coerce?: Coercer;
+    validator?: Validator;
 }
 
 export interface SchemaDefinition {
-    [name: string]: SchemaItem,
+    [name: string]: SchemaItem;
 }
 
 // schema for MSSQL connection strings (https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection.connectionstring)
@@ -154,7 +154,7 @@ export const SCHEMA: SchemaDefinition = {
         type: SchemaTypes.NUMBER,
         default: 8000,
         validator(val: string | number | boolean): boolean {
-            return typeof val === 'number' &&  val >= 512 && val <= 32768;
+            return typeof val === 'number' && val >= 512 && val <= 32768;
         },
     },
     'Password': {
