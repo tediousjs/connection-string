@@ -30,6 +30,7 @@ export default tslint.config(
     {
         files: ['./test/**'],
         rules: {
+            '@typescript-eslint/no-floating-promises': ['off'],
             '@typescript-eslint/no-unsafe-assignment': ['off'],
         },
     },

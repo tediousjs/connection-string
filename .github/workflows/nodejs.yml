@@ -93,11 +93,11 @@ jobs:
       - name: Install deps
         run: npm ci
       - name: Test code
-        run: npm run test:coverage --silent -- npm run test:workflow
+        run: npm run test:coverage
       - name: Report coverage
         run: |
           echo "# Code coverage" >> $GITHUB_STEP_SUMMARY
-          npx nyc report | sed --expression='1d;$d'  >> $GITHUB_STEP_SUMMARY
+          npx c8 report | sed --expression='1d;$d'  >> $GITHUB_STEP_SUMMARY
         if: ${{ !cancelled() }}
   release:
     name: Release

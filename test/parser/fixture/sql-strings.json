@@ -7,23 +7,8 @@
       "user id": "user",
       "password": "password",
       "initial catalog": "AdventureWorks",
-      "server":  "MySqlServer"
-    },
-    "canonical": false,
-    "allowUnknown": false
-  },
-  {
-    "name": "Parses a basic connection string and uses canonical keys",
-    "connection_string": "Persist Security Info=False;User ID=user;Password=password;Initial Catalog=AdventureWorks;Server=MySqlServer",
-    "expected": {
-      "persist security info": false,
-      "user id": "user",
-      "password": "password",
-      "initial catalog": "AdventureWorks",
       "data source":  "MySqlServer"
-    },
-    "canonical": true,
-    "allowUnknown": false
+    }
   },
   {
     "name": "Parses a connection string and allows unknown values",
@@ -36,8 +21,11 @@
       "data source":  "MySqlServer",
       "stream": true
     },
-    "canonical": true,
-    "allowUnknown": true
+    "additionalSchema": {
+      "stream": {
+        "type": "boolean"
+      }
+    }
   },
   {
     "name": "parses a string value that starts with numbers",
@@ -46,6 +34,17 @@
       "client id": "1e92dd5a-091f-4b2b-bc1b-8461ced6a177",
       "client secret": "55a4ef49-bef5-4669-818b-ff148c0c0db9",
       "tenant id": "5dc09092-ee09-4e5c-9515-ba937415e9ff"
+    },
+    "additionalSchema": {
+      "client id": {
+        "type": "string"
+      },
+      "client secret": {
+        "type": "string"
+      },
+      "tenant id": {
+        "type": "string"
+      }
     }
   }
 ]
