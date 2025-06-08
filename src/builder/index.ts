@@ -42,7 +42,7 @@ function encodeTuple(key: string, value: ValidDataTypes): [string, string] {
     }
 }
 
-export function buildConnectionString(data: Record<string, ValidDataTypes>): string {
+export function build(data: Record<string, ValidDataTypes>): string {
     return Object.entries(data).map(([key, value]) => {
         return encodeTuple(key.trim(), value).join('=');
     }).join(';');

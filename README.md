@@ -11,55 +11,108 @@ The library also provides the ability to parse SQL Connection Strings.
 
 ## Parsing connection strings
 
-The library comes with a generic connection string parser that will parse through valid connections strings and produce a key-value
-map of the entries in that string. No additional validation is performed.
+The library comes with a generic connection string parser that will parse through valid connection strings and produce a key-value
+readonly Map of the entries in that string. No additional validation is performed.
 
 ```js
-const { parseConnectionString } = require('@tediousjs/connection-string');
+const { parse } = require('@tediousjs/connection-string');
 
 const connectionString = 'User ID=user;Password=password;Initial Catalog=AdventureWorks;Server=MySqlServer';
 
-const parsed = parseConnectionString(connectionString);
+const parsed = parse(connectionString);
 
 console.log(parsed);
 ```
 
 Output to the console will be:
 
-```json
-{
-  "User id": "user",
-  "password": "password",
-  "initial catalog": "AdventureWorks",
-  "server": "MySqlServer"
+```
+Map(4) {
+  'user id' => 'user',
+  'password' => 'password',
+  'initial catalog' => 'AdventureWorks',
+  'server' => 'MySqlServer'
 }
 ```
 
 ## Parsing SQL connection strings
 
-There is a specific helper for parsing SQL connection strings and this comes with a value normaliser and validation. It also has an
-option to "canonicalise" the properties. For many properties in an SQL connections string, there are aliases, when canonical properties
-are being used, these aliases will be returned as the canonical property.
+SQL connection strings can be parsed to a JSON object using the `toSchema()` method and the provided
+`MSSQL_SCHEMA`.
 
 ```js
-const { parseSqlConnectionString } = require('@tediousjs/connection-string');
+const { parse, MSSQL_SCHEMA } = require('@tediousjs/connection-string');
 
 const connectionString = 'User ID=user;Password=password;Initial Catalog=AdventureWorks;Server=MySqlServer';
 
-const parsed = parseSqlConnectionString(connectionString, true);
+const parsed = parse(connectionString);
 
-console.log(parsed);
+console.log(parsed.toSchema(MSSQL_SCHEMA));
 ```
 
 Output to console will be:
 
 ```json
 {
-  "user id": "user",
-  "password": "password",
+  "data source": "MySqlServer",
   "initial catalog": "AdventureWorks",
-  "data source": "MySqlServer"
+  "password": "password",
+  "user id":"user"
 }
 ```
 
 NB: The `Server` property from the connection string has been re-written to the value `Data Source`
+
+## Custom schemas
+
+If you need to parse a connection string into a custom schema, the format is as follows:
+
+```ts
+import { parse } from '@tediousjs/connection-string';
+
+// a keyed map of name => config
+const schema = {
+    'a string': {
+        type: 'string',
+        default: 'a default value',
+        aliases: ['other', 'allowed', 'names'],
+    },
+    'a number': {
+        type: 'number',
+        default: 123,
+    },
+    'a boolean': {
+        type: 'boolean',
+        default: true,
+    },
+};
+
+const parsed = parse('a string=test;a number=987;a boolean=false;other value=missing');
+console.log(parsed.toSchema(schema));
+```
+
+Output:
+
+```json
+{
+  "a string": "test",
+  "a number": 987,
+  "a boolean": false
+}
+```
+
+## Accessing properties
+
+The parsed connection string object is a readonly `Map` with an overloadded `get()` method allowing
+coercion of the value:
+
+```ts
+import { parse } from '@tediousjs/connection-string';
+const parsed = parse('a string=test;a number=987;a boolean=false;other value=missing');
+// all values are strings by default
+console.log(parsed.get('a number')); // "987"
+// values can be coersed to an expected type
+console.log(parsed.get('a number', 'number')); // 987
+// coersion will be permissive in its type coersion
+console.log(parsed.get('a number', 'boolean')); // true
+```

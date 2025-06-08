@@ -1,11 +1,11 @@
 export interface CollectionConfig {
-    terminator: string,
-    quotes: Record<string, string>,
+    terminator: string;
+    quotes: Record<string, string>;
 }
 
 export interface ParserConfig {
-    key: CollectionConfig,
-    value: CollectionConfig,
+    key: CollectionConfig;
+    value: CollectionConfig;
 }
 
 enum CollectionMode {
@@ -22,13 +22,13 @@ const CONFIG: ParserConfig = Object.freeze({
         terminator: ';',
         quotes: {
             '"': '"',
-            "'": "'",
+            '\'': '\'',
             '{': '}',
         },
     },
 });
 
-export default function connectionStringParser(connectionString: string, parserConfig: ParserConfig = CONFIG): object {
+export default function connectionStringParser(connectionString: string, parserConfig: ParserConfig = CONFIG): Record<string, string> {
     const parsed: Record<string, string> = {};
     let collectionMode = CollectionMode.key;
     let started = false;
@@ -56,7 +56,7 @@ export default function connectionStringParser(connectionString: string, parserC
     }
 
     function config(): CollectionConfig {
-        return collectionMode === CollectionMode.key ? parserConfig.key : parserConfig.value
+        return collectionMode === CollectionMode.key ? parserConfig.key : parserConfig.value;
     }
 
     function isTerminator(char: string): boolean {

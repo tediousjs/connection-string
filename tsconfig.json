@@ -1,11 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@tsconfig/node10/tsconfig.json",
+  "extends": "@tsconfig/node20",
   "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "rootDir": "./src",
+    "outDir": "./lib",
     "declaration": true,
     "declarationMap": true,
-    "outDir": "lib",
     "sourceMap": true
   },
-  "exclude": ["test/", "lib/"]
+  "include": ["./src"]
 }
