@@ -44,7 +44,7 @@ export class ConnectionString implements ReadonlyMap<string, string> {
     // it would be really nice to be able to make this a generice (eg: get<string>) and that would then coerce the value
     // see typia library for an example of something similar
     get<T extends CoerceType = 'string'>(key: string, coerceType?: T): CoerceTypeMap[T] | undefined {
-        const val = this.#parsed.get(key);
+        const val = this.#parsed.get(key.toLowerCase());
         const actualType = coerceType ?? 'string';
         if (typeof val === 'undefined' || actualType === 'string') {
             return val as CoerceTypeMap[T];
@@ -96,7 +96,7 @@ export class ConnectionString implements ReadonlyMap<string, string> {
             // try to find the property
             const prop = [key, ...aliases ?? []].find((k) => this.has(k));
             if (prop || includeMissing) {
-                props.push([key, prop ? this.get(prop, type) : defaultValue] as [keyof T, CoerceType]);
+                props.push([key, prop ? this.get(prop.toLowerCase(), type) : defaultValue] as [keyof T, CoerceType]);
             }
             return props;
         }, [] as [keyof T, CoerceType][])) as InferSchema<T>;
