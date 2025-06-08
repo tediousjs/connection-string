@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.0.0](https://github.com/tediousjs/connection-string/compare/v0.6.0...v1.0.0) (2025-06-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* Replace `connectionStringParser()` with `parse()` method. Rename
+`buildConnectionString()` to `build()`. Remove `parseSqlConnectionString` and
+replace with a way to transform parsed connection strings into a specific
+object schema (see ConnectionString.toSchema()`).
+* Drop support for non-LTS Node.js versions and upgrade
+the typescript version to support the newer JS features.
+
+### Features
+
+* bump minimum node support to v20 & update typescript ([5d8e090](https://github.com/tediousjs/connection-string/commit/5d8e09060d45cb2270b7d641cec10794ea2005f1))
+* create new parser to return readonly map when parsing connecton strings ([b8ee936](https://github.com/tediousjs/connection-string/commit/b8ee936021bb64c3afaacf87f7373db66dbb27cb))
+* refactor parsing interface ([41dbc3d](https://github.com/tediousjs/connection-string/commit/41dbc3d2da1dab9fd8d60e278e882eaee7a1c372))
+
 ## [0.6.0](https://github.com/tediousjs/connection-string/compare/v0.5.0...v0.6.0) (2024-09-11)
 
 
