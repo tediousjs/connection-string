@@ -14,6 +14,12 @@ updates:
         patterns:
           - "semantic-release"
           - "@semantic-release/*"
+      code-lint:
+        patterns:
+          - "typescript-eslint"
+          - "@stylistic/*"
+          - "eslint"
+          - "@eslint/*"
       commit-lint:
         patterns:
           - "@commitlint/*"
