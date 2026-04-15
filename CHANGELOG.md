@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0](https://github.com/tediousjs/connection-string/compare/v1.0.0...v1.1.0) (2026-04-15)
+
+### Features
+
+* add exports field to package.json ([1d48e17](https://github.com/tediousjs/connection-string/commit/1d48e17c483e1312a73cfeb8b748feff09bd4fd0))
+
 ## [1.0.0](https://github.com/tediousjs/connection-string/compare/v0.6.0...v1.0.0) (2025-06-08)
 
 
