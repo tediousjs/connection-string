@@ -15,4 +15,30 @@ describe('parser', () => {
             });
         });
     });
+
+    describe('error handling', () => {
+        it('throws on malformed connection string with trailing characters after quoted value', () => {
+            assert.throws(() => parse('key="value"garbage'), {
+                message: 'Malformed connection string',
+            });
+        });
+
+        it('throws on unterminated double-quoted value', () => {
+            assert.throws(() => parse('key="unterminated'), {
+                message: 'Connection string terminated unexpectedly',
+            });
+        });
+
+        it('throws on unterminated single-quoted value', () => {
+            assert.throws(() => parse('key=\'unterminated'), {
+                message: 'Connection string terminated unexpectedly',
+            });
+        });
+
+        it('throws on unterminated brace-quoted value', () => {
+            assert.throws(() => parse('key={unterminated'), {
+                message: 'Connection string terminated unexpectedly',
+            });
+        });
+    });
 });
