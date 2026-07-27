@@ -1,6 +1,7 @@
 {
   "name": "@tediousjs/connection-string",
   "version": "1.1.0",
+  "packageManager": "npm@10.9.8",
   "description": "SQL ConnectionString parser",
   "repository": {
     "type": "git",
