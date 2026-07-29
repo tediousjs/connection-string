@@ -53,7 +53,7 @@
     "@stylistic/eslint-plugin": "^5.0.0",
     "@tsconfig/node22": "^22.0.5",
     "@types/node": "^20.19.0",
-    "c8": "^11.0.0",
+    "c8": "^12.0.0",
     "eslint": "^10.0.2",
     "semantic-release": "^25.0.3",
     "tsx": "^4.19.4",
