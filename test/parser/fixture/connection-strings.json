@@ -14,6 +14,52 @@
     }
   },
   {
+    "name": "parses a single value with repeated trailing semicolons",
+    "connection_string": "Keyword=Value;;",
+    "expected": {
+      "keyword": "Value"
+    }
+  },
+  {
+    "name": "skips repeated semicolons between pairs",
+    "connection_string": "Server=h;;Database=d;;;User Id=u",
+    "expected": {
+      "server": "h",
+      "database": "d",
+      "user id": "u"
+    }
+  },
+  {
+    "name": "skips leading semicolons",
+    "connection_string": ";; Server=h",
+    "expected": {
+      "server": "h"
+    }
+  },
+  {
+    "name": "skips semicolons separated by whitespace",
+    "connection_string": "Server=h; ; Database=d",
+    "expected": {
+      "server": "h",
+      "database": "d"
+    }
+  },
+  {
+    "name": "skips repeated semicolons after a quoted value",
+    "connection_string": "Password='p;w';;Server=h",
+    "expected": {
+      "password": "p;w",
+      "server": "h"
+    }
+  },
+  {
+    "name": "parses keywords that contain `;`",
+    "connection_string": "Key;word=Value",
+    "expected": {
+      "key;word": "Value"
+    }
+  },
+  {
     "name": "parses keywords that contain `=`",
     "connection_string": "Key==word=Value",
     "expected": {
