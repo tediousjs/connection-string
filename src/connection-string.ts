@@ -90,13 +90,18 @@ export class ConnectionString implements ReadonlyMap<string, string> {
         });
     }
 
+    // an empty boolean or number value is not set, so it gets the schema default
+    #isSet(key: string, type?: CoerceType): boolean {
+        return (type !== 'boolean' && type !== 'number') || !!this.#parsed.get(key.toLowerCase())?.trim();
+    }
+
     // a way to extract a formatted object from the connection string
     toSchema<T extends SchemaDefinition>(schema: T, { includeMissing }: { includeMissing?: boolean } = {}): InferSchema<T> {
         return Object.fromEntries(Object.entries(schema).reduce((props, [key, { type, default: defaultValue, aliases }]) => {
             // try to find the property
             const prop = [key, ...aliases ?? []].find((k) => this.has(k));
             if (prop || includeMissing) {
-                props.push([key, prop ? this.get(prop.toLowerCase(), type) : defaultValue] as [keyof T, CoerceType]);
+                props.push([key, prop && this.#isSet(prop, type as CoerceType | undefined) ? this.get(prop.toLowerCase(), type) : defaultValue] as [keyof T, CoerceType]);
             }
             return props;
         }, [] as [keyof T, CoerceType][])) as InferSchema<T>;
