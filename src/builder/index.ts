@@ -22,7 +22,11 @@ function isQuoted(val: string): boolean {
 }
 
 function needsQuotes(val: string): boolean {
-    return !isQuoted(val) && !!val.match(/\[|]|{|}|\|\(|\)|,|;|\?|\*|=|!|@/)?.length;
+    if (isQuoted(val)) {
+        return false;
+    }
+    // the parser trims unquoted values, and reads a leading `'` or `"` as an opening quote
+    return val !== val.trim() || /^['"]/.test(val) || !!val.match(/\[|]|{|}|\|\(|\)|,|;|\?|\*|=|!|@/)?.length;
 }
 
 function encodeTuple(key: string, value: ValidDataTypes): [string, string] {
@@ -44,6 +48,7 @@ function encodeTuple(key: string, value: ValidDataTypes): [string, string] {
 
 export function build(data: Record<string, ValidDataTypes>): string {
     return Object.entries(data).map(([key, value]) => {
-        return encodeTuple(key.trim(), value).join('=');
+        // `=` ends a key, so a literal `=` in a key is escaped as `==`
+        return encodeTuple(key.trim().replace(/=/g, '=='), value).join('=');
     }).join(';');
 }
