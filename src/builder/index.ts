@@ -48,6 +48,7 @@ function encodeTuple(key: string, value: ValidDataTypes): [string, string] {
 
 export function build(data: Record<string, ValidDataTypes>): string {
     return Object.entries(data).map(([key, value]) => {
-        return encodeTuple(key.trim(), value).join('=');
+        // `=` ends a key, so a literal `=` in a key is escaped as `==`
+        return encodeTuple(key.trim().replace(/=/g, '=='), value).join('=');
     }).join(';');
 }

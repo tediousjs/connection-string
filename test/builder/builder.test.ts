@@ -31,6 +31,23 @@ describe('builder', () => {
         });
     });
 
+    it('escapes `=` in keys', () => {
+        const built = build({
+            'a=b': '1',
+            '=start': '2',
+            'end=': '3',
+            'a==b': '4',
+        });
+        assert.equal(built, 'a==b=1;==start=2;end===3;a====b=4');
+    });
+
+    it('builds keys that parse back to the same key', () => {
+        const keys = ['a=b', '=start', 'end=', 'a==b', '=', 'a;b'];
+        keys.forEach((key) => {
+            assert.deepEqual([...parse(build({ [key]: 'value' })).entries()], [[key, 'value']], `round trip of ${JSON.stringify(key)}`);
+        });
+    });
+
     it('builds a connection string', () => {
         const built = build({
             strkey: 'value',
