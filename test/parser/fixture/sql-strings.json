@@ -28,6 +28,16 @@
     }
   },
   {
+    "name": "trims quoted boolean values",
+    "connection_string": "Server=h;TrustServerCertificate={ no };MultiSubnetFailover=\" false \";Encrypt=' yes '",
+    "expected": {
+      "data source": "h",
+      "trustservercertificate": false,
+      "multisubnetfailover": false,
+      "encrypt": true
+    }
+  },
+  {
     "name": "uses the default for an empty boolean or number value",
     "connection_string": "Server=h;TrustServerCertificate=;Connect Timeout=;Database=d",
     "expected": {

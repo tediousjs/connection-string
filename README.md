@@ -120,3 +120,5 @@ console.log(parsed.get('a number', 'number')); // 987
 // coersion will be permissive in its type coersion
 console.log(parsed.get('a number', 'boolean')); // true
 ```
+
+`get(key, 'boolean')` gives `false` for `false`, `no` and `0`, in any case and with any surrounding whitespace, and for an empty value. Any other value gives `true`. `get(key, 'number')` uses `parseInt()`. For an empty value, `toSchema()` uses the schema default instead (see [Custom schemas](#custom-schemas)).
