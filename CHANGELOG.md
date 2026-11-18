@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1](https://github.com/tediousjs/connection-string/compare/v1.1.0...v1.1.1) (2026-11-18)
+
+### Bug Fixes
+
+* **builder:** escape `=` in keys ([a86b8ea](https://github.com/tediousjs/connection-string/commit/a86b8eaa970995ebbe0d9891833bcf8b3c4cd79c))
+* **builder:** quote values with surrounding whitespace or a leading quote ([a1a5a26](https://github.com/tediousjs/connection-string/commit/a1a5a26812644e29f1a382b75b9e865e5a35e17f))
+* **parser:** skip repeated semicolons between pairs ([31a0d1f](https://github.com/tediousjs/connection-string/commit/31a0d1f0d4a86a6fe845fba1300f74fcccd26721))
+* **parser:** stop an empty value from swallowing the next pair ([b1660c8](https://github.com/tediousjs/connection-string/commit/b1660c84f148693853bb6e02959bb8ad4abac475))
+
 ## [1.1.0](https://github.com/tediousjs/connection-string/compare/v1.0.0...v1.1.0) (2026-04-15)
 
 ### Features
