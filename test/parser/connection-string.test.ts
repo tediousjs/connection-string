@@ -40,5 +40,17 @@ describe('parser', () => {
                 message: 'Connection string terminated unexpectedly',
             });
         });
+
+        it('throws on an empty keyword', () => {
+            assert.throws(() => parse('=value'), {
+                message: 'Malformed connection string',
+            });
+        });
+
+        it('throws on an empty keyword after another pair', () => {
+            assert.throws(() => parse('key=value; =other'), {
+                message: 'Malformed connection string',
+            });
+        });
     });
 });

@@ -67,6 +67,62 @@
     }
   },
   {
+    "name": "parses keywords that start with `=`",
+    "connection_string": "==Key=Value",
+    "expected": {
+      "=key": "Value"
+    }
+  },
+  {
+    "name": "parses keywords that end with `=`",
+    "connection_string": "Key===Value",
+    "expected": {
+      "key=": "Value"
+    }
+  },
+  {
+    "name": "parses empty values",
+    "connection_string": "TrustServerCertificate=;Encrypt=true;Server=h",
+    "expected": {
+      "trustservercertificate": "",
+      "encrypt": "true",
+      "server": "h"
+    }
+  },
+  {
+    "name": "parses empty values with whitespace",
+    "connection_string": "Key= ;Other=Value",
+    "expected": {
+      "key": "",
+      "other": "Value"
+    }
+  },
+  {
+    "name": "parses an empty connection string",
+    "connection_string": "",
+    "expected": {}
+  },
+  {
+    "name": "parses a connection string of only whitespace and semicolons",
+    "connection_string": " ;; ",
+    "expected": {}
+  },
+  {
+    "name": "parses an empty value with a trailing semicolon",
+    "connection_string": "Key=;",
+    "expected": {
+      "key": ""
+    }
+  },
+  {
+    "name": "parses values that start with `=`",
+    "connection_string": "Key= =Value;Other=x",
+    "expected": {
+      "key": "=Value",
+      "other": "x"
+    }
+  },
+  {
     "name": "parses values to contain `=`",
     "connection_string": "Keyword=Val=ue",
     "expected": {

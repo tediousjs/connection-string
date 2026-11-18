@@ -101,17 +101,16 @@ export default function connectionStringParser(connectionString: string, parserC
     while (pointer < connectionString.length) {
         const current = connectionString.charAt(pointer);
         if (!finished) {
-            if (!started) {
-                if (!isSkippable(current)) {
-                    start();
-                    if (isStartQuote(current)) {
-                        quoted = true;
-                        quote = current;
-                    } else {
-                        push(current);
-                    }
-                }
+            if (!started && isSkippable(current)) {
+                // nothing to collect yet
+            } else if (!started && isStartQuote(current)) {
+                start();
+                quoted = true;
+                quote = current;
             } else {
+                // the first character can also be a terminator, for example in an
+                // empty value (`Key=;`) or in a key that starts with `==`
+                start();
                 if (quoted && isEndQuote(current)) {
                     const next = connectionString.charAt(pointer + 1);
                     if (current === next) {
@@ -126,6 +125,8 @@ export default function connectionStringParser(connectionString: string, parserC
                     if (collectionMode === CollectionMode.key && current === next) {
                         push(current);
                         pointer++;
+                    } else if (collectionMode === CollectionMode.key && buffer === '') {
+                        throw new Error('Malformed connection string');
                     } else {
                         collect();
                     }
