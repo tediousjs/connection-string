@@ -22,7 +22,11 @@ function isQuoted(val: string): boolean {
 }
 
 function needsQuotes(val: string): boolean {
-    return !isQuoted(val) && !!val.match(/\[|]|{|}|\|\(|\)|,|;|\?|\*|=|!|@/)?.length;
+    if (isQuoted(val)) {
+        return false;
+    }
+    // the parser trims unquoted values, and reads a leading `'` or `"` as an opening quote
+    return val !== val.trim() || /^['"]/.test(val) || !!val.match(/\[|]|{|}|\|\(|\)|,|;|\?|\*|=|!|@/)?.length;
 }
 
 function encodeTuple(key: string, value: ValidDataTypes): [string, string] {
