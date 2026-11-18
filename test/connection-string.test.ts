@@ -1,6 +1,6 @@
 import * as assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { ConnectionString } from '../src/connection-string';
+import { ConnectionString, type SchemaDefinition } from '../src/connection-string';
 
 describe('connection-string', () => {
     const connectionString = 'keyword=value;isTrue=true;isYes=yes;isFalse=false;isNo=no;is0=0;is1=1';
@@ -96,6 +96,49 @@ describe('connection-string', () => {
                 ['is0', '0'],
                 ['is1', '1'],
             ]);
+        });
+    });
+    describe('.toSchema()', () => {
+        const schema = {
+            'a boolean': { type: 'boolean' as const, default: true },
+            'a number': { type: 'number' as const, default: 15 },
+            'a string': { type: 'string' as const, default: 'default' },
+            'no default': { type: 'boolean' as const },
+        };
+        it('coerces values that are set', () => {
+            const parsed = new ConnectionString('a boolean=false;a number=30;a string=value;no default=yes');
+            assert.deepEqual(parsed.toSchema(schema), {
+                'a boolean': false,
+                'a number': 30,
+                'a string': 'value',
+                'no default': true,
+            });
+        });
+        it('uses the default for an empty boolean or number value, and keeps the key', () => {
+            const parsed = new ConnectionString('a boolean=;a number= ;a string=;no default=');
+            const result = parsed.toSchema(schema);
+            assert.deepEqual(result, {
+                'a boolean': true,
+                'a number': 15,
+                'a string': '',
+                'no default': undefined,
+            });
+            assert.ok('no default' in result);
+        });
+        it('still throws for an empty value with an unsupported type', () => {
+            const parsed = new ConnectionString('when=');
+            const badSchema = { when: { type: 'date', default: 'D' } } as unknown as SchemaDefinition;
+            assert.throws(() => parsed.toSchema(badSchema), { message: 'Coerce type not supported' });
+        });
+        it('includes missing keys with their defaults when asked', () => {
+            const parsed = new ConnectionString('a number=30');
+            assert.deepEqual(parsed.toSchema(schema), { 'a number': 30 });
+            assert.deepEqual(parsed.toSchema(schema, { includeMissing: true }), {
+                'a boolean': true,
+                'a number': 30,
+                'a string': 'default',
+                'no default': undefined,
+            });
         });
     });
     describe('.toString()', () => {

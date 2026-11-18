@@ -28,6 +28,43 @@
     }
   },
   {
+    "name": "uses the default for an empty boolean or number value",
+    "connection_string": "Server=h;TrustServerCertificate=;Connect Timeout=;Database=d",
+    "expected": {
+      "data source": "h",
+      "trustservercertificate": false,
+      "connection timeout": 15,
+      "initial catalog": "d"
+    }
+  },
+  {
+    "name": "uses the default for a boolean or number value of only whitespace",
+    "connection_string": "Server=h;TrustServerCertificate={ };MultiSubnetFailover={ };Packet Size=' '",
+    "expected": {
+      "data source": "h",
+      "trustservercertificate": false,
+      "multisubnetfailover": false,
+      "packet size": 8000
+    }
+  },
+  {
+    "name": "keeps an empty string value",
+    "connection_string": "Server=h;Password=;Application Name={ }",
+    "expected": {
+      "data source": "h",
+      "password": "",
+      "application name": " "
+    }
+  },
+  {
+    "name": "uses the default for an empty value given by an alias",
+    "connection_string": "Server=h;Timeout=",
+    "expected": {
+      "data source": "h",
+      "connection timeout": 15
+    }
+  },
+  {
     "name": "parses a string value that starts with numbers",
     "connection_string": "client id=1e92dd5a-091f-4b2b-bc1b-8461ced6a177;client secret=55a4ef49-bef5-4669-818b-ff148c0c0db9;tenant id=5dc09092-ee09-4e5c-9515-ba937415e9ff;",
     "expected": {

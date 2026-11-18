@@ -101,6 +101,10 @@ Output:
 }
 ```
 
+Keys that are not in the connection string are left out. To include them with their `default` value, use `toSchema(schema, { includeMissing: true })`.
+
+An empty value for a `boolean` or `number` key, such as `a number=;`, means that the value is not set. The key is included with its `default` value (or `undefined` if it has no default). An empty value for a `string` key stays an empty string.
+
 ## Accessing properties
 
 The parsed connection string object is a readonly `Map` with an overloadded `get()` method allowing
