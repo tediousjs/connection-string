@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.2](https://github.com/tediousjs/connection-string/compare/v1.1.1...v1.1.2) (2026-11-18)
+
+### Bug Fixes
+
+* use the schema default for an empty boolean or number value ([2c49b2b](https://github.com/tediousjs/connection-string/commit/2c49b2b711c1c1ef9104d513577d0d593b64fdc3))
+
 ## [1.1.1](https://github.com/tediousjs/connection-string/compare/v1.1.0...v1.1.1) (2026-11-18)
 
 ### Bug Fixes
