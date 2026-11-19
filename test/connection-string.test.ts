@@ -45,6 +45,16 @@ describe('connection-string', () => {
             assert.equal(parsed.get('is0', 'boolean'), false);
             assert.equal(parsed.get('is1', 'boolean'), true);
         });
+        it('trims a boolean value before coercing it', () => {
+            const parsed = new ConnectionString('a={ false };b=" no ";c=\' 0\';d={\tFALSE\t};e={ true };f=" yes ";g={ }');
+            assert.equal(parsed.get('a', 'boolean'), false);
+            assert.equal(parsed.get('b', 'boolean'), false);
+            assert.equal(parsed.get('c', 'boolean'), false);
+            assert.equal(parsed.get('d', 'boolean'), false);
+            assert.equal(parsed.get('e', 'boolean'), true);
+            assert.equal(parsed.get('f', 'boolean'), true);
+            assert.equal(parsed.get('g', 'boolean'), false);
+        });
         it('returns undefined for missing value', () => {
             const parsed = new ConnectionString(connectionString);
             assert.equal(parsed.get('missing'), undefined);

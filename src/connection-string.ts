@@ -50,8 +50,11 @@ export class ConnectionString implements ReadonlyMap<string, string> {
             return val as CoerceTypeMap[T];
         }
         switch (actualType) {
-            case 'boolean':
-                return (['false', 'no', '0'].includes(val.toLowerCase()) ? false : !!val) as CoerceTypeMap[T];
+            case 'boolean': {
+                // a quoted value keeps its surrounding whitespace, so trim it before the match, as SqlClient does
+                const bool = val.trim().toLowerCase();
+                return (['false', 'no', '0'].includes(bool) ? false : !!bool) as CoerceTypeMap[T];
+            }
             case 'number':
                 return parseInt(val, 10) as CoerceTypeMap[T];
             default:
