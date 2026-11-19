@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.3](https://github.com/tediousjs/connection-string/compare/v1.1.2...v1.1.3) (2026-11-19)
+
+### Bug Fixes
+
+* trim a value before boolean coercion ([13ba07b](https://github.com/tediousjs/connection-string/commit/13ba07b7d2928ac5772cb637cb8b4279be737142))
+
 ## [1.1.2](https://github.com/tediousjs/connection-string/compare/v1.1.1...v1.1.2) (2026-11-18)
 
 ### Bug Fixes
